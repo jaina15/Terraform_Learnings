@@ -1,0 +1,65 @@
+1. What is terraform?
+-> Terraform allows you to automate and manage your infrastructure, platform and services that run on that platform.
+-> It's open source
+-> It's declarative. declarative = define what end result you want.
+-> It's a tool for infrastructure provisioning.
+
+2. Difference between Ansible and Terraform?
+-> Both: Infrastructure as a Code
+-> Both automate: provisioning, configuring and managing the infrastructure.
+-> Terraform is mainly infrastructure provisioning tool.
+-> Ansible is mainly a configuration tool.
+
+3. How does Terraform work?
+-> Terraform has 2 main components.
+    - Core: It has 2 inputs. Tf-config and state(current state of setup)
+            What needs to be created/updated/destroyed?
+            Compares current state vs the desired state(config file)
+    - Providers: AWS/Azure/Other IaaS/ Kubernetes (PaaS)/ Fastly (SaaS)
+
+4. What are the terraform commands for different stages?
+-> refresh: query the infrastructure provider to get current state.
+-> plan: create and execution plan.
+-> apply: execute the plan.
+-> destroy: destroy the resources/infrastructure.
+
+5. What are providers?
+-> Expose resources for a specific infrastructure platform like AWS, Azure.
+-> Responsible for understanding API of that platform.
+-> Just code that knows how to talk to specific technology or platform. 
+
+
+Provider is like importing a library.
+Resource/Data is like function call of library.
+Arguments are parameters of function.
+
+Avoid using
+terraform destroy -target aws_vpc.dev-subnet-2
+
+6. Difference between current state and desired state?
+-> terraform plan
+
+# Auto Approve without confirming:
+-> terraform apply -auto-approve
+
+# Destroy complete infrastructure:
+-> terraform destroy
+
+
+# State:
+# State information of infrastructure is written in terraform.tfstate file after the apply command is successful.
+# A backup file for state is also present with the name: terraform.tfstate.backup
+# Terraform uses .tfstate file in order to see what changes needs to be made.
+# to check state of terraform infrastructure:
+-> terraform state [list,mv,pull,push,replace-provider,rm,show]
+
+# Output:
+# Output values are like function return values
+
+
+# Variables:
+# input variables are like function arguments.
+# 3 ways to pass values to input variables
+    - get the propmt to ask the values for the variables by just directly giving terraform apply command.
+    - from command line arguments. terraform apply -var "subnet_cidr_block=10.0.30.0/24"
+    - defining variables file(terraform.tfvars).
